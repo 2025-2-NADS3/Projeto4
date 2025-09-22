@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".CityDetailActivity">
+
+    <ImageView
+        android:id="@+id/imageViewCityDetail"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/city_image_description"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:srcCompat="@tools:sample/background/scenic" />
+
+    <TextView
+        android:id="@+id/textViewCityNameDetail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textAppearance="?attr/textAppearanceHeadline5"
+        android:gravity="center_horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewCityDetail"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="Nome da Cidade Muito Grande" />
+
+    <TextView
+        android:id="@+id/textViewLabelPopulation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="População:"
+        android:textAppearance="?attr/textAppearanceSubtitle1"
+        app:layout_constraintTop_toBottomOf="@+id/textViewCityNameDetail"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/textViewPopulationDetail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:textAppearance="?attr/textAppearanceBody1"
+        app:layout_constraintStart_toEndOf="@+id/textViewLabelPopulation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textViewLabelPopulation"
+        tools:text="12.345.678" />
+
+    <TextView
+        android:id="@+id/textViewLabelArea"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Área (km²):"
+        android:textAppearance="?attr/textAppearanceSubtitle1"
+        app:layout_constraintTop_toBottomOf="@+id/textViewLabelPopulation"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/textViewAreaDetail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:textAppearance="?attr/textAppearanceBody1"
+        app:layout_constraintStart_toEndOf="@+id/textViewLabelArea"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textViewLabelArea"
+        tools:text="1.521,00" />
+
+    <TextView
+        android:id="@+id/textViewLabelDensity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Densidade (hab/km²):"
+        android:textAppearance="?attr/textAppearanceSubtitle1"
+        app:layout_constraintTop_toBottomOf="@+id/textViewLabelArea"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/textViewDensityDetail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:textAppearance="?attr/textAppearanceBody1"
+        app:layout_constraintStart_toEndOf="@+id/textViewLabelDensity"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textViewLabelDensity"
+        tools:text="8.117,27" />
+
+    <Button
+        android:id="@+id/buttonBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Voltar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="16dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
