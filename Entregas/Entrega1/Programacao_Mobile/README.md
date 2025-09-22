@@ -1,4 +1,16 @@
-# Comendaria da Tia - App da Cantina FECAP
+# FECAP - Fundação de Comércio Álvares Penteado
+
+<p align="center">
+<a href= "https://www.fecap.br/"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhZPrRa89Kma0ZZogxm0pi-tCn_TLKeHGVxywp-LXAFGR3B1DPouAJYHgKZGV0XTEf4AE&usqp=CAU" alt="FECAP - Fundação de Comércio Álvares Penteado" border="0"></a>
+</p>
+
+# Reformulação Instituto Criativo
+
+## FourWare
+
+## Integrantes: <a href="https://www.linkedin.com/in/renan-damprelli/">Renan Damprelli</a>, <a href="https://www.linkedin.com/in/jo%C3%A3o-pedro-gon%C3%A7alves-holanda/">João Pedro Gonçalves</a>, <a>Saulo Ribeiro</a> , <a>Cassio Gonçalves</a>
+## Professor Orientador: <a href="https://www.linkedin.com/in/victorbarq/?originalSubdomain=br">Dr. Victor Rosetti de Quiroz</a>
+
 
 ## 1. Apresentação do Projeto
 
