@@ -24,6 +24,11 @@
             </intent-filter>
         </activity>
 
+        <!-- NOVA ACTIVITY DECLARADA AQUI -->
+        <activity
+            android:name=".DadosSalvosActivity"
+            android:label="Dados Salvos Localmente" />
+
     </application>
 
 </manifest>
