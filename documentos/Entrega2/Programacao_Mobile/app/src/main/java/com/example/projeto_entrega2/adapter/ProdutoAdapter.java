@@ -8,9 +8,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.projeto_entrega2.R;
 import com.example.projeto_entrega2.model.Produto;
+import com.squareup.picasso.Picasso;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -47,7 +47,7 @@ public class ProdutoAdapter extends RecyclerView.Adapter<ProdutoAdapter.ProdutoV
         NumberFormat formatoMoeda = NumberFormat.getCurrencyInstance(ptBr);
         holder.textViewPreco.setText(formatoMoeda.format(produtoAtual.getPreco()));
 
-        Glide.with(holder.itemView.getContext())
+        Picasso.get()
                 .load(produtoAtual.getUrlImagem())
                 .placeholder(R.drawable.ic_launcher_background)
                 .error(R.drawable.ic_launcher_foreground)

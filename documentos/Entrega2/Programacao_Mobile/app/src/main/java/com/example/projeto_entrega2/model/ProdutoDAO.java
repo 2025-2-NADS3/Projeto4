@@ -11,11 +11,14 @@ import java.util.List;
 public interface ProdutoDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertAll(List<Produto> produtos); // RENOMEADO DE inserirTodos PARA insertAll
+    void insert(Produto produto);
 
-    @Query("SELECT * FROM tabela_de_produtos ORDER BY nome ASC")
-    List<Produto> getAll(); // RENOMEADO DE buscarTodos PARA getAll
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insertAll(List<Produto> produtos);
+
+    @Query("SELECT * FROM tabela_de_produtos")
+    List<Produto> getAll();
 
     @Query("DELETE FROM tabela_de_produtos")
-    void deleteAll(); // RENOMEADO DE apagarTodos PARA deleteAll
+    void deleteAll();
 }
