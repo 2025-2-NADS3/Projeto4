@@ -2,8 +2,14 @@ package com.example.projeto_entrega2;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,8 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.projeto_entrega2.adapter.ProdutoAdapter;
 import com.example.projeto_entrega2.database.AppDatabase;
 import com.example.projeto_entrega2.model.Produto;
-import com.example.projeto_entrega2.model.ProdutoDAO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DadosSalvosActivity extends AppCompatActivity {
@@ -20,6 +26,7 @@ public class DadosSalvosActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ProdutoAdapter produtoAdapter;
     private ProgressBar progressBar;
+    private AppDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,14 +36,49 @@ public class DadosSalvosActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
         progressBar = findViewById(R.id.progressBar);
 
+        db = AppDatabase.getDatabase(getApplicationContext());
+
+        setupRecyclerView();
+        buscarDadosDoBanco();
+    }
+
+    private void setupRecyclerView() {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        
-        // CORREÇÃO 1: O construtor do adapter não recebe argumentos
         produtoAdapter = new ProdutoAdapter();
         recyclerView.setAdapter(produtoAdapter);
+    }
 
-        // Busca os dados diretamente do banco, sem passar pela rede
-        buscarDadosDoBanco();
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.dados_salvos_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.action_delete_all) {
+            deleteAllData();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void deleteAllData() {
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                db.produtoDAO().deleteAll();
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                super.onPostExecute(aVoid);
+                produtoAdapter.setProdutos(new ArrayList<>()); // Limpa a lista na UI
+                Toast.makeText(DadosSalvosActivity.this, "Dados apagados!", Toast.LENGTH_SHORT).show();
+            }
+        }.execute();
     }
 
     private void buscarDadosDoBanco() {
@@ -44,10 +86,8 @@ public class DadosSalvosActivity extends AppCompatActivity {
         new SelectFromDbAsyncTask(this).execute();
     }
 
-    // AsyncTask para buscar dados do banco em uma thread de fundo
     private static class SelectFromDbAsyncTask extends AsyncTask<Void, Void, List<Produto>> {
-
-        private DadosSalvosActivity activity;
+        private final DadosSalvosActivity activity;
 
         SelectFromDbAsyncTask(DadosSalvosActivity activity) {
             this.activity = activity;
@@ -55,17 +95,13 @@ public class DadosSalvosActivity extends AppCompatActivity {
 
         @Override
         protected List<Produto> doInBackground(Void... voids) {
-            // Acessa o DAO e busca todos os produtos
-            ProdutoDAO dao = AppDatabase.getDatabase(activity.getApplicationContext()).produtoDAO();
-            return dao.getAll();
+            return activity.db.produtoDAO().getAll();
         }
 
         @Override
         protected void onPostExecute(List<Produto> produtos) {
-            super.onPostExecute(produtos);
             if (activity != null) {
                 activity.progressBar.setVisibility(View.GONE);
-                // CORREÇÃO 2: O método para atualizar os dados se chama 'setProdutos'
                 activity.produtoAdapter.setProdutos(produtos);
             }
         }
