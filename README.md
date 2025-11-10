@@ -31,39 +31,30 @@ Desenvolver um aplicativo mobile (inicialmente para Android, podendo ser multipl
 *   Desenvolver interfaces intuitivas e responsivas voltadas à experiência do usuário.
 *   Aplicar conceitos de testes e qualidade de software para validar funcionalidades.
 
-## 3. Requisitos Funcionais
+## 3. 🛠 Estrutura de pastas
 
-### Acesso Aluno (Cliente):
-*   Auto cadastro e login de aluno.
-*   Visualização do cardápio atualizado.
-*   Realização de pedidos e escolha de itens.
-*   Pagamento via API (Stripe, Mercado Pago, PagSeguro) ou simulado.
-*   Visualização do histórico de pedidos realizados.
+-Raiz<br>
+|<br>
+|-->documentos<br>
+  &emsp;|-->Entrega1<br>
+  &emsp;&emsp;|Programacao Mobile<br>
+  &emsp;&emsp;|Sistemas Operacionais e Arquitetura Cloud Native<br>
+  &emsp;&emsp;|Testes e Qualidade de Software<br>
+  &emsp;&emsp;|User Experience Digital<br>
+  &emsp;|-->Entrega2<br>
+  &emsp;&emsp;|Programacao Mobile<br>
+  &emsp;&emsp;|Sistemas Operacionais e Arquitetura Cloud Native<br>
+  &emsp;&emsp;|Testes e Qualidade de Software<br>
+  &emsp;&emsp;|User Experience Digital<br>
+|-->imagens<br>
+|-->src<br>
+|readme.md<br>
 
-### Acesso Cantina (Empresa):
-*   Login administrativo.
-*   Cadastro e atualização do cardápio.
-*   Visualização de pedidos pendentes e confirmação de retirada.
-*   Baixa de pedidos (pedido entregue).
-*   Relatórios gerenciais.
 
-## 4. Requisitos Não Funcionais
-*   Interface intuitiva e responsiva (UX/UI).
-*   Aplicação mobile compatível com Android (e preferencialmente iOS).
-*   Armazenamento em nuvem.
-*   Arquitetura orientada a objetos e/ou baseada em componentes reutilizáveis.
-*   Disponibilidade mínima offline para visualização do cardápio.
-*   Segurança no armazenamento de dados sensíveis.
-*   Código modular e testável.
+<b>README.MD</b>: Arquivo que serve como guia e explicação geral sobre o projeto. O mesmo que você está lendo agora.
 
-## 5. Tecnologias Utilizadas (Planejado)
-*   **Plataforma Mobile:** Android (inicialmente)
-*   **Linguagem:** Java (conforme o projeto atual) / Kotlin
-*   **Banco de Dados:** (A definir - ex: Firebase Firestore, SQLite com sincronização)
-*   **API de Pagamento:** (A definir/simular - ex: Stripe, Mercado Pago)
-*   **Arquitetura:** (A definir - ex: MVVM, MVC, MVI)
+<b>documentos</b>: Toda a documentação estará nesta pasta.
 
-## 6. Status do Projeto
-Em desenvolvimento.
+<b>imagens</b>: Imagens do sistema
 
----
+<b>src</b>: Pasta que contém o código fonte.
