@@ -12,13 +12,13 @@
 ## Professores Orientadores: <a href="https://www.linkedin.com/in/aimarlopes">Aimar Martins Lopes</a>, <a href="https://www.linkedin.com/in/francisco-escobar">Francisco de Souza Escobar</a>, <a href="https://www.linkedin.com/in/jefferson-o-silva">Jefferson de Oliveira Silva</a>, <a>Rodrigo da Rosa</a> e <a href="https://www.linkedin.com/in/victorbarq/?originalSubdomain=br">Victor Bruno Alexander Rosetti de Quiroz</a>
 
 
-## 1. Apresentação do Projeto
+## Apresentação do Projeto
 
 A "Comedoria da Tia" é a cantina da FECAP, localizada no 1º Andar do Bloco C, responsável por atender os alunos nos intervalos de aula e no horário de almoço. Atualmente, os processos de atendimento enfrentam desafios relacionados ao tempo limitado para a realização de pedidos, sobretudo devido às filas no caixa, que comprometem o tempo dos estudantes para suas refeições.
 
 Diante desse cenário, propõe-se o desenvolvimento de um aplicativo mobile com o objetivo de otimizar o processo de compra de produtos da cantina. O aplicativo permitirá aos alunos realizarem seus pedidos e pagamentos antecipadamente, restando apenas a retirada dos produtos no balcão. O sistema também contará com uma interface administrativa para a cantina gerenciar o cardápio, os pedidos e relatórios operacionais.
 
-## 2. Objetivos
+## Objetivos
 
 ### Objetivo Geral:
 Desenvolver um aplicativo mobile (inicialmente para Android, podendo ser multiplataforma) que permita aos alunos da FECAP realizar pedidos e pagamentos de forma prática e antecipada na cantina "Comendaria da Tia", contribuindo para a melhoria da experiência de consumo e da gestão operacional da cantina.
@@ -31,7 +31,7 @@ Desenvolver um aplicativo mobile (inicialmente para Android, podendo ser multipl
 *   Desenvolver interfaces intuitivas e responsivas voltadas à experiência do usuário.
 *   Aplicar conceitos de testes e qualidade de software para validar funcionalidades.
 
-## 3. 🛠 Estrutura de pastas
+## 🛠 Estrutura de pastas
 
 -Raiz<br>
 |<br>
