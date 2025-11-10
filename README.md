@@ -9,12 +9,12 @@
 ## FourWare
 
 ## Integrantes: <a href="https://www.linkedin.com/in/renan-damprelli/">Renan Damprelli</a>, <a href="https://www.linkedin.com/in/jo%C3%A3o-pedro-gon%C3%A7alves-holanda/">João Pedro Gonçalves</a>, <a>Saulo Ribeiro</a>, <a>Cassio Gonçalves</a>
-## Professor Orientador: <a href="https://www.linkedin.com/in/victorbarq/?originalSubdomain=br">Dr. Victor Rosetti de Quiroz</a>
+## Professores Orientadores: <a href="https://www.linkedin.com/in/aimarlopes">Aimar Martins Lopes</a>, <a href="https://www.linkedin.com/in/francisco-escobar">Francisco de Souza Escobar</a>, <a href="https://www.linkedin.com/in/jefferson-o-silva">Jefferson de Oliveira Silva</a>, <a Rodrigo da Rosa</a> e <a href="https://www.linkedin.com/in/victorbarq/?originalSubdomain=br">Dr. Victor Rosetti de Quiroz</a>
 
 
 ## 1. Apresentação do Projeto
 
-A "Comendaria da Tia" é a cantina da FECAP, localizada no 1º Andar do Bloco C, responsável por atender os alunos nos intervalos de aula e no horário de almoço. Atualmente, os processos de atendimento enfrentam desafios relacionados ao tempo limitado para a realização de pedidos, sobretudo devido às filas no caixa, que comprometem o tempo dos estudantes para suas refeições.
+A "Comedoria da Tia" é a cantina da FECAP, localizada no 1º Andar do Bloco C, responsável por atender os alunos nos intervalos de aula e no horário de almoço. Atualmente, os processos de atendimento enfrentam desafios relacionados ao tempo limitado para a realização de pedidos, sobretudo devido às filas no caixa, que comprometem o tempo dos estudantes para suas refeições.
 
 Diante desse cenário, propõe-se o desenvolvimento de um aplicativo mobile com o objetivo de otimizar o processo de compra de produtos da cantina. O aplicativo permitirá aos alunos realizarem seus pedidos e pagamentos antecipadamente, restando apenas a retirada dos produtos no balcão. O sistema também contará com uma interface administrativa para a cantina gerenciar o cardápio, os pedidos e relatórios operacionais.
 
