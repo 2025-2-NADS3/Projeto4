@@ -8,7 +8,7 @@
 
 ## FourWare
 
-## Integrantes: <a href="https://www.linkedin.com/in/renan-damprelli/">Renan Damprelli</a>, <a href="https://www.linkedin.com/in/jo%C3%A3o-pedro-gon%C3%A7alves-holanda/">João Pedro Gonçalves</a>, <a>Saulo Ribeiro</a>, <a>Cassio Gonçalves</a>
+## Integrantes: <a href="https://www.linkedin.com/in/cassio-gama">Cassio Gama</a>, <a href="https://www.linkedin.com/in/jo%C3%A3o-pedro-gon%C3%A7alves-holanda/">João Pedro Gonçalves</a>, <a href="https://www.linkedin.com/in/renan-damprelli/">Renan Damprelli</a> e <a href="https://www.linkedin.com/in/saulo-santos-a1ba86334">Saulo Santos</a>
 ## Professores Orientadores: <a href="https://www.linkedin.com/in/aimarlopes">Aimar Martins Lopes</a>, <a href="https://www.linkedin.com/in/francisco-escobar">Francisco de Souza Escobar</a>, <a href="https://www.linkedin.com/in/jefferson-o-silva">Jefferson de Oliveira Silva</a>, <a>Rodrigo da Rosa</a> e <a href="https://www.linkedin.com/in/victorbarq/?originalSubdomain=br">Victor Bruno Alexander Rosetti de Quiroz</a>
 
 
