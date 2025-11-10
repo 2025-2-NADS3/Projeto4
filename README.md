@@ -9,7 +9,7 @@
 ## FourWare
 
 ## Integrantes: <a href="https://www.linkedin.com/in/renan-damprelli/">Renan Damprelli</a>, <a href="https://www.linkedin.com/in/jo%C3%A3o-pedro-gon%C3%A7alves-holanda/">João Pedro Gonçalves</a>, <a>Saulo Ribeiro</a>, <a>Cassio Gonçalves</a>
-## Professores Orientadores: <a href="https://www.linkedin.com/in/aimarlopes">Aimar Martins Lopes</a>, <a href="https://www.linkedin.com/in/francisco-escobar">Francisco de Souza Escobar</a>, <a href="https://www.linkedin.com/in/jefferson-o-silva">Jefferson de Oliveira Silva</a>, <a Rodrigo da Rosa</a> e <a href="https://www.linkedin.com/in/victorbarq/?originalSubdomain=br">Dr. Victor Rosetti de Quiroz</a>
+## Professores Orientadores: <a href="https://www.linkedin.com/in/aimarlopes">Aimar Martins Lopes</a>, <a href="https://www.linkedin.com/in/francisco-escobar">Francisco de Souza Escobar</a>, <a href="https://www.linkedin.com/in/jefferson-o-silva">Jefferson de Oliveira Silva</a>, <a>Rodrigo da Rosa</a> e <a href="https://www.linkedin.com/in/victorbarq/?originalSubdomain=br">Dr. Victor Rosetti de Quiroz</a>
 
 
 ## 1. Apresentação do Projeto
