@@ -15,6 +15,7 @@ public class SplashActivity extends AppCompatActivity {
 
         Button btnApiProducts = findViewById(R.id.btnApiProducts);
         Button btnSavedProducts = findViewById(R.id.btnSavedProducts);
+        Button btnAnalytics = findViewById(R.id.btnAnalytics);
 
         btnApiProducts.setOnClickListener(v -> {
             Intent intent = new Intent(SplashActivity.this, MainActivity.class);
@@ -23,6 +24,11 @@ public class SplashActivity extends AppCompatActivity {
 
         btnSavedProducts.setOnClickListener(v -> {
             Intent intent = new Intent(SplashActivity.this, DadosSalvosActivity.class);
+            startActivity(intent);
+        });
+
+        btnAnalytics.setOnClickListener(v -> {
+            Intent intent = new Intent(SplashActivity.this, AnalyticsActivity.class);
             startActivity(intent);
         });
     }

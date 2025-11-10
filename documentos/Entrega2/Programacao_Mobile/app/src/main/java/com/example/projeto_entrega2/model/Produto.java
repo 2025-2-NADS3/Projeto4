@@ -10,29 +10,34 @@ import com.google.gson.annotations.SerializedName;
 public class Produto implements Parcelable {
 
     @PrimaryKey(autoGenerate = true)
-    @SerializedName("id") // Mapeamento para o campo 'id' da API
+    @SerializedName("id")
     private int id;
 
-    @SerializedName("title") // Mapeamento para o campo 'title' da API
+    @SerializedName("title")
     private String nome;
 
-    @SerializedName("price") // Mapeamento para o campo 'price' da API
+    @SerializedName("price")
     private double preco;
 
-    @SerializedName("description") // Mapeamento para o campo 'description' da API
+    @SerializedName("description")
     private String descricao;
 
-    @SerializedName("category") // Mapeamento para o campo 'category' da API
+    @SerializedName("category")
     private String categoria;
 
-    @SerializedName("thumbnail") // Mapeamento para o campo 'thumbnail' da API
+    @SerializedName("brand") // NOVO CAMPO
+    private String marca;
+
+    @SerializedName("thumbnail")
     private String urlImagem;
 
-    public Produto(String nome, double preco, String descricao, String categoria, String urlImagem) {
+    // CONSTRUTOR ATUALIZADO
+    public Produto(String nome, double preco, String descricao, String categoria, String marca, String urlImagem) {
         this.nome = nome;
         this.preco = preco;
         this.descricao = descricao;
         this.categoria = categoria;
+        this.marca = marca;
         this.urlImagem = urlImagem;
     }
 
@@ -42,6 +47,7 @@ public class Produto implements Parcelable {
     public double getPreco() { return preco; }
     public String getDescricao() { return descricao; }
     public String getCategoria() { return categoria; }
+    public String getMarca() { return marca; } // NOVO GETTER
     public String getUrlImagem() { return urlImagem; }
 
     // --- Setter para o ID ---
@@ -49,13 +55,14 @@ public class Produto implements Parcelable {
         this.id = id;
     }
 
-    // Implementação do Parcelable (necessária para passar objetos entre Activities, não usada aqui, mas mantida por segurança)
+    // PARCELABLE ATUALIZADO
     protected Produto(Parcel in) {
         id = in.readInt();
         nome = in.readString();
         preco = in.readDouble();
         descricao = in.readString();
         categoria = in.readString();
+        marca = in.readString(); // NOVO CAMPO
         urlImagem = in.readString();
     }
 
@@ -66,6 +73,7 @@ public class Produto implements Parcelable {
         dest.writeDouble(preco);
         dest.writeString(descricao);
         dest.writeString(categoria);
+        dest.writeString(marca); // NOVO CAMPO
         dest.writeString(urlImagem);
     }
 

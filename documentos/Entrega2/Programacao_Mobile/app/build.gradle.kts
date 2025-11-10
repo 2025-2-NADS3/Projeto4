@@ -52,6 +52,9 @@ dependencies {
 
     // Gson (Biblioteca para parsear JSON)
     implementation("com.google.code.gson:gson:2.10.1")
+    
+    // MPAndroidChart (Biblioteca de Gráficos)
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)

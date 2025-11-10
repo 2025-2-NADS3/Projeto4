@@ -10,7 +10,7 @@
         android:id="@+id/btnApiProducts"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ver Produtos da API"
+        android:text="View API Products"
         app:layout_constraintBottom_toTopOf="@+id/btnSavedProducts"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,10 +22,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="Ver Produtos Salvos"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="View Saved Products"
+        app:layout_constraintBottom_toTopOf="@+id/btnAnalytics"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnApiProducts" />
+
+    <Button
+        android:id="@+id/btnAnalytics"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="View Analytics"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnSavedProducts" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
