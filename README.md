@@ -58,3 +58,44 @@ Desenvolver um aplicativo mobile (inicialmente para Android, podendo ser multipl
 <b>imagens</b>: Imagens do sistema
 
 <b>src</b>: Pasta que contém o código fonte.
+
+## 🛠 Instalação
+
+<b>Android:</b>
+
+Faça o Download do JOGO.apk no seu celular.
+Execute o APK e siga as instruções de seu telefone.
+
+```sh
+Coloque código do prompt de comnando se for necessário
+```
+
+<b>Windows:</b>
+
+Não há instalação! Apenas executável!
+Encontre o JOGO.exe na pasta executáveis e execute-o como qualquer outro programa.
+
+```sh
+Coloque código do prompt de comnando se for necessário
+```
+
+<b>HTML:</b>
+
+Não há instalação!
+Encontre o index.html na pasta executáveis e execute-o como uma página WEB (através de algum browser).
+
+## 💻 Configuração para Desenvolvimento
+
+Para desenvolvimento do App, é utilizado o Android Studio. Clone o repositório e abra a pasta com os recursos.
+
+O site está sendo desenvolvido em React. Para executar testes, primeiramente execute o código a seguir no terminal:
+```sh
+npm run dev
+```
+E em outro terminal, execute o seguinte código para rodar o servidor com o banco de dados:
+```sh
+node server.js
+```
+
+## 📋 Licença/License
+Utilize o link <https://chooser-beta.creativecommons.org/> para fazer uma licença CC BY 4.0.
