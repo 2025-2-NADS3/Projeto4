@@ -91,7 +91,7 @@ Siga os passos abaixo para configurar o ambiente de desenvolvimento e executar o
 1.  **Clonar o Repositório:**
     Abra um terminal ou Git Bash e clone este repositório para sua máquina local usando o seguinte comando:
     ```bash
-    git clone 'https://github.com/2025-2-NADS3/Projeto4.git'
+    git clone https://github.com/2025-2-NADS3/Projeto4.git
     ```
 
 2.  **Abrir no Android Studio:**
