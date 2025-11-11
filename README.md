@@ -63,24 +63,6 @@ Desenvolver um aplicativo mobile (inicialmente para Android, podendo ser multipl
 
 <b>Android:</b>
 
-Faça o Download do JOGO.apk no seu celular.
-Execute o APK e siga as instruções de seu telefone.
-
-```sh
-Coloque código do prompt de comnando se for necessário
-```
-
-<b>Windows:</b>
-
-Não há instalação! Apenas executável!
-Encontre o JOGO.exe na pasta executáveis e execute-o como qualquer outro programa.
-
-```sh
-Coloque código do prompt de comnando se for necessário
-```
-
-<b>HTML:</b>
-
 Não há instalação!
 Para executar este projeto, você precisará ter o [Android Studio](https://developer.android.com/studio) (versão Iguana ou mais recente recomendada) instalado e configurado em sua máquina.
 
