@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: comedoria
+      MYSQL_USER: appuser
+      MYSQL_PASSWORD: apppassword
+    volumes:
+      - ./mysql-init:/docker-entrypoint-initdb.d:ro
+    ports:
+      - "3307:3306"
+
+  backend:
+    build: ./backend
+    restart: on-failure
+    environment:
+      - DB_HOST=mysql
+      - DB_USER=appuser
+      - DB_PASSWORD=apppassword
+      - DB_NAME=comedoria
+    depends_on:
+      - mysql
+    ports:
+      - "3001:3000"
+    volumes:
+      - ./backend:/usr/src/app
