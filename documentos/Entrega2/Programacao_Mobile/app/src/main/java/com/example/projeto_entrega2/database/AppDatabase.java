@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase;
 import com.example.projeto_entrega2.model.Produto;
 import com.example.projeto_entrega2.model.ProdutoDAO;
 
-@Database(entities = {Produto.class}, version = 1, exportSchema = false) // MUDANÇA AQUI
+@Database(entities = {Produto.class}, version = 2, exportSchema = false) // VERSÃO ATUALIZADA
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract ProdutoDAO produtoDAO();
@@ -20,6 +20,7 @@ public abstract class AppDatabase extends RoomDatabase {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                                     AppDatabase.class, "comedoria_database")
+                            .fallbackToDestructiveMigration() // ADICIONADO AQUI
                             .build();
                 }
             }
