@@ -82,20 +82,34 @@ Coloque código do prompt de comnando se for necessário
 <b>HTML:</b>
 
 Não há instalação!
-Encontre o index.html na pasta executáveis e execute-o como uma página WEB (através de algum browser).
+Para executar este projeto, você precisará ter o [Android Studio](https://developer.android.com/studio) (versão Iguana ou mais recente recomendada) instalado e configurado em sua máquina.
 
 ## 💻 Configuração para Desenvolvimento
 
-Para desenvolvimento do App, é utilizado o Android Studio. Clone o repositório e abra a pasta com os recursos.
+Siga os passos abaixo para configurar o ambiente de desenvolvimento e executar o projeto:
 
-O site está sendo desenvolvido em React. Para executar testes, primeiramente execute o código a seguir no terminal:
-```sh
-npm run dev
-```
-E em outro terminal, execute o seguinte código para rodar o servidor com o banco de dados:
-```sh
-node server.js
-```
+1.  **Clonar o Repositório:**
+    Abra um terminal ou Git Bash e clone este repositório para sua máquina local usando o seguinte comando:
+    ```bash
+    git clone 'https://github.com/2025-2-NADS3/Projeto4.git'
+    ```
+
+2.  **Abrir no Android Studio:**
+    *   Inicie o Android Studio.
+    *   Na tela de boas-vindas, selecione **"Open"** (ou "Open an Existing Project").
+    *   Navegue até o diretório onde você clonou o projeto e selecione a pasta raiz. Clique em **"OK"**.
+
+3.  **Sincronizar o Projeto com o Gradle:**
+    *   O Android Studio irá detectar automaticamente os arquivos de configuração do Gradle (`build.gradle.kts` e `settings.gradle.kts`).
+    *   Aguarde o processo de sincronização ser concluído. O Android Studio irá baixar todas as dependências listadas na seção 2 (Volley, Room, MPAndroidChart, etc.).
+    *   Se a sincronização não iniciar automaticamente, você pode acioná-la manualmente clicando no ícone de elefante do Gradle com uma seta de sincronização na barra de ferramentas superior, ou acessando **File > Sync Project with Gradle Files**.
+
+4.  **Executar o Aplicativo:**
+    *   Após a sincronização bem-sucedida, você pode executar o aplicativo.
+    *   Conecte um dispositivo Android via USB (com o modo de depuração ativado) ou inicie um Emulador Android (AVD).
+    *   Clique no botão **"Run 'app'"** (ícone de play verde) na barra de ferramentas superior.
+
+O aplicativo será compilado, instalado e iniciado no dispositivo/emulador selecionado, pronto para ser testado.
 
 ## 📋 Licença/License
 <a href="https://github.com/2025-2-NADS3/Projeto4">App Comedoria da Tia</a> © 2025 by <a href="https://github.com/2025-2-NADS3/Projeto4">FourWare</a> is licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a><img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="" style="max-width: 1em;max-height:1em;margin-left: .2em;">
