@@ -16,148 +16,188 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardSalgados"
+    <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_margin="8dp"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="4dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toStartOf="@+id/cardDoces"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+        app:layout_constraintEnd_toEndOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="16dp">
 
-            <ImageView
-                android:id="@+id/imgSalgados"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:background="@color/purple_200" />
-
-            <TextView
+            <androidx.cardview.widget.CardView
+                android:id="@+id/search_bar_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#80000000"
-                android:gravity="center"
-                android:padding="8dp"
-                android:text="Salgados"
-                android:textColor="@android:color/white"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
+                android:layout_margin="16dp">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardDoces"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_margin="8dp"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="4dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/cardSalgados"
-        app:layout_constraintTop_toTopOf="@+id/cardSalgados">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:padding="12dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@android:drawable/ic_menu_search"
+                        app:tint="?android:attr/textColorHint" />
 
-            <ImageView
-                android:id="@+id/imgDoces"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:background="@color/teal_200" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="Buscar produtos..."
+                        android:textColor="?android:attr/textColorHint"
+                        android:textSize="16sp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Categorias"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <GridLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#80000000"
-                android:gravity="center"
-                android:padding="8dp"
-                android:text="Doces"
-                android:textColor="@android:color/white"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
+                android:columnCount="2"
+                android:padding="4dp">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardBebidas"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_margin="8dp"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="4dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toStartOf="@+id/cardRefeicoes"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardSalgados">
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardSalgados"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="4dp"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="4dp">
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="120dp"
+                            android:scaleType="centerCrop" 
+                            android:background="@color/purple_200" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:background="#80000000"
+                            android:gravity="center"
+                            android:padding="8dp"
+                            android:text="Salgados"
+                            android:textColor="@android:color/white"
+                            android:textSize="16sp" />
+                    </FrameLayout>
+                </androidx.cardview.widget.CardView>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardDoces"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="4dp"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="4dp">
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="120dp"
+                            android:scaleType="centerCrop"
+                            android:background="@color/teal_200" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:background="#80000000"
+                            android:gravity="center"
+                            android:padding="8dp"
+                            android:text="Doces"
+                            android:textColor="@android:color/white"
+                            android:textSize="16sp" />
+                    </FrameLayout>
+                </androidx.cardview.widget.CardView>
 
-            <ImageView
-                android:id="@+id/imgBebidas"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:background="@color/purple_700" />
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardBebidas"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="4dp"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="4dp">
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="120dp"
+                            android:scaleType="centerCrop"
+                            android:background="@color/purple_700" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:background="#80000000"
+                            android:gravity="center"
+                            android:padding="8dp"
+                            android:text="Bebidas"
+                            android:textColor="@android:color/white"
+                            android:textSize="16sp" />
+                    </FrameLayout>
+                </androidx.cardview.widget.CardView>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#80000000"
-                android:gravity="center"
-                android:padding="8dp"
-                android:text="Bebidas"
-                android:textColor="@android:color/white"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardRefeicoes"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="4dp"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="4dp">
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="120dp"
+                            android:scaleType="centerCrop"
+                            android:background="@color/teal_700" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:background="#80000000"
+                            android:gravity="center"
+                            android:padding="8dp"
+                            android:text="Refeições"
+                            android:textColor="@android:color/white"
+                            android:textSize="16sp" />
+                    </FrameLayout>
+                </androidx.cardview.widget.CardView>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardRefeicoes"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_margin="8dp"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="4dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/cardBebidas"
-        app:layout_constraintTop_toTopOf="@+id/cardBebidas">
+            </GridLayout>
+        </LinearLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    </ScrollView>
 
-            <ImageView
-                android:id="@+id/imgRefeicoes"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:background="@color/teal_700" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#80000000"
-                android:gravity="center"
-                android:padding="8dp"
-                android:text="Refeições"
-                android:textColor="@android:color/white"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:menu="@menu/bottom_nav_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

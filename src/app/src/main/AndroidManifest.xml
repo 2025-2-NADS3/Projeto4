@@ -36,10 +36,25 @@
             android:name=".VitrineActivity"
             android:exported="false" />
         <activity
+            android:name=".SearchActivity"
+            android:exported="false" />
+        <activity
             android:name=".ProductListActivity"
             android:exported="false" />
         <activity
             android:name=".ProductDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CarrinhoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CouponsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".OrdersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ProfileActivity"
             android:exported="false" />
         <activity
             android:name=".CantinaPainelActivity"

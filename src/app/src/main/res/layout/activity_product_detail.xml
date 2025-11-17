@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ProductDetailActivity">
 
+    <!-- AppBar e Imagem (sem alterações) -->
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
@@ -35,9 +36,11 @@
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
+    <!-- Conteúdo da tela (sem alterações) -->
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="80dp" 
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
@@ -66,5 +69,55 @@
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
+
+    <!-- NOVA BARRA INFERIOR -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@android:color/white"
+        android:elevation="8dp"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <!-- Controle de Quantidade -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/button_decrease_quantity"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@android:drawable/arrow_down_float" />
+
+            <TextView
+                android:id="@+id/text_view_quantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:text="1"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/button_increase_quantity"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@android:drawable/arrow_up_float" />
+        </LinearLayout>
+
+        <!-- Botão Adicionar -->
+        <Button
+            android:id="@+id/button_add_to_cart"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="16dp"
+            tools:text="Adicionar R$ 25,00" />
+    </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

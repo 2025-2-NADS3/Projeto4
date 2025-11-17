@@ -2,11 +2,17 @@ package com.example.projeto_entrega2;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class VitrineActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -18,24 +24,81 @@ public class VitrineActivity extends AppCompatActivity implements View.OnClickLi
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle("Cardápio - Categorias");
+            getSupportActionBar().setTitle("Comedoria da Tia");
         }
 
+        // --- Listeners para os cards ---
+        CardView searchBar = findViewById(R.id.search_bar_card);
         CardView cardSalgados = findViewById(R.id.cardSalgados);
         CardView cardDoces = findViewById(R.id.cardDoces);
         CardView cardBebidas = findViewById(R.id.cardBebidas);
         CardView cardRefeicoes = findViewById(R.id.cardRefeicoes);
 
+        searchBar.setOnClickListener(this);
         cardSalgados.setOnClickListener(this);
         cardDoces.setOnClickListener(this);
         cardBebidas.setOnClickListener(this);
         cardRefeicoes.setOnClickListener(this);
+
+        // --- Lógica do Menu de Navegação Inferior ---
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setSelectedItemId(R.id.nav_home);
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            int itemId = item.getItemId();
+            if (itemId == R.id.nav_home) {
+                return true;
+            } else if (itemId == R.id.nav_search) {
+                startActivity(new Intent(getApplicationContext(), SearchActivity.class));
+                overridePendingTransition(0, 0);
+                finish();
+                return true;
+            } else if (itemId == R.id.nav_coupons) {
+                startActivity(new Intent(getApplicationContext(), CouponsActivity.class));
+                overridePendingTransition(0, 0);
+                finish();
+                return true;
+            } else if (itemId == R.id.nav_orders) {
+                startActivity(new Intent(getApplicationContext(), OrdersActivity.class));
+                overridePendingTransition(0, 0);
+                finish();
+                return true;
+            } else if (itemId == R.id.nav_profile) {
+                startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                overridePendingTransition(0, 0);
+                finish();
+                return true;
+            }
+            return false;
+        });
+    }
+
+    // ... (onClick e outros métodos permanecem os mesmos)
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.action_cart) {
+            startActivity(new Intent(this, CarrinhoActivity.class));
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
     public void onClick(View v) {
-        String category = "";
         int id = v.getId();
+        if (id == R.id.search_bar_card) {
+            startActivity(new Intent(this, SearchActivity.class));
+            return;
+        }
+
+        String category = "";
         if (id == R.id.cardSalgados) {
             category = "Salgados";
         } else if (id == R.id.cardDoces) {

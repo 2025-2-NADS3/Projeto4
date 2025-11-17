@@ -4,16 +4,19 @@ import android.content.Context;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import com.example.projeto_entrega2.model.CartItem;
+import com.example.projeto_entrega2.model.CartItemDAO;
 import com.example.projeto_entrega2.model.Produto;
 import com.example.projeto_entrega2.model.ProdutoDAO;
 import com.example.projeto_entrega2.model.User;
 import com.example.projeto_entrega2.model.UserDAO;
 
-@Database(entities = {Produto.class, User.class}, version = 3, exportSchema = false) // VERSÃO ATUALIZADA
+@Database(entities = {Produto.class, User.class, CartItem.class}, version = 4, exportSchema = false) // VERSÃO ATUALIZADA
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract ProdutoDAO produtoDAO();
-    public abstract UserDAO userDAO(); // NOVO DAO
+    public abstract UserDAO userDAO();
+    public abstract CartItemDAO cartItemDAO(); // NOVO DAO
 
     private static volatile AppDatabase INSTANCE;
 

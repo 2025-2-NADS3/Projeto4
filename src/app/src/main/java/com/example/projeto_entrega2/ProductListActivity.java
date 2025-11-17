@@ -3,10 +3,14 @@ package com.example.projeto_entrega2;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -56,6 +60,23 @@ public class ProductListActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.action_cart) {
+            Intent intent = new Intent(this, CarrinhoActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
@@ -66,7 +87,6 @@ public class ProductListActivity extends AppCompatActivity {
         produtoAdapter = new ProdutoAdapter();
         recyclerView.setAdapter(produtoAdapter);
 
-        // **NOVA LÓGICA DE CLIQUE AQUI**
         produtoAdapter.setOnItemClickListener(produto -> {
             Intent intent = new Intent(ProductListActivity.this, ProductDetailActivity.class);
             intent.putExtra(ProductDetailActivity.EXTRA_PRODUCT, produto);

@@ -30,6 +30,10 @@ public interface ProdutoDAO {
     @Query("SELECT * FROM tabela_de_produtos WHERE categoria = :categoria ORDER BY nome")
     List<Produto> getProductsByCategory(String categoria);
 
+    // NOVA FUNÇÃO DE BUSCA
+    @Query("SELECT * FROM tabela_de_produtos WHERE nome LIKE :query OR descricao LIKE :query")
+    List<Produto> searchProducts(String query);
+
     @Query("DELETE FROM tabela_de_produtos")
     void deleteAll();
 }
