@@ -21,12 +21,12 @@ public interface CartItemDAO {
     @Delete
     void delete(CartItem item);
 
-    @Query("SELECT * FROM tabela_carrinho")
-    List<CartItem> getAllItems();
+    @Query("SELECT * FROM cart_items")
+    List<CartItem> getAll();
 
-    @Query("SELECT * FROM tabela_carrinho WHERE productId = :productId LIMIT 1")
+    @Query("SELECT * FROM cart_items WHERE productId = :productId LIMIT 1")
     CartItem findById(int productId);
 
-    @Query("DELETE FROM tabela_carrinho")
+    @Query("DELETE FROM cart_items")
     void deleteAll();
 }

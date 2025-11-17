@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,12 +28,12 @@ public class VitrineActivity extends AppCompatActivity implements View.OnClickLi
             getSupportActionBar().setTitle("Comedoria da Tia");
         }
 
-        // --- Listeners para os cards ---
+        // --- Listeners para os cards (TIPOS CORRIGIDOS) ---
         CardView searchBar = findViewById(R.id.search_bar_card);
-        CardView cardSalgados = findViewById(R.id.cardSalgados);
-        CardView cardDoces = findViewById(R.id.cardDoces);
-        CardView cardBebidas = findViewById(R.id.cardBebidas);
-        CardView cardRefeicoes = findViewById(R.id.cardRefeicoes);
+        LinearLayout cardSalgados = findViewById(R.id.cardSalgados);
+        LinearLayout cardDoces = findViewById(R.id.cardDoces);
+        LinearLayout cardBebidas = findViewById(R.id.cardBebidas);
+        LinearLayout cardRefeicoes = findViewById(R.id.cardRefeicoes);
 
         searchBar.setOnClickListener(this);
         cardSalgados.setOnClickListener(this);
@@ -71,8 +72,6 @@ public class VitrineActivity extends AppCompatActivity implements View.OnClickLi
             return false;
         });
     }
-
-    // ... (onClick e outros métodos permanecem os mesmos)
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

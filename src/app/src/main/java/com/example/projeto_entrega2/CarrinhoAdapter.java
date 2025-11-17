@@ -1,4 +1,4 @@
-package com.example.projeto_entrega2.adapter;
+package com.example.projeto_entrega2;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -11,7 +11,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.projeto_entrega2.R;
 import com.example.projeto_entrega2.database.AppDatabase;
 import com.example.projeto_entrega2.model.CartItem;
 import com.squareup.picasso.Picasso;
@@ -22,27 +21,26 @@ import java.util.List;
 import java.util.Locale;
 import java.util.function.Consumer;
 
-public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder> {
+public class CarrinhoAdapter extends RecyclerView.Adapter<CarrinhoAdapter.CarrinhoViewHolder> {
 
     private List<CartItem> items = new ArrayList<>();
     private final Consumer<List<CartItem>> updateTotalCallback;
     private final Context context;
 
-    // Construtor alinhado com a CarrinhoActivity
-    public CartAdapter(Context context, Consumer<List<CartItem>> updateTotalCallback) {
+    public CarrinhoAdapter(Context context, Consumer<List<CartItem>> updateTotalCallback) {
         this.context = context;
         this.updateTotalCallback = updateTotalCallback;
     }
 
     @NonNull
     @Override
-    public CartViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CarrinhoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_carrinho, parent, false);
-        return new CartViewHolder(view);
+        return new CarrinhoViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CartViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CarrinhoViewHolder holder, int position) {
         CartItem currentItem = items.get(position);
         holder.bind(currentItem);
     }
@@ -55,20 +53,18 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     public void setItems(List<CartItem> cartItems) {
         this.items = cartItems;
         notifyDataSetChanged();
-        // Garante que o total seja atualizado quando os itens são carregados
         updateTotalCallback.accept(items);
     }
 
-    class CartViewHolder extends RecyclerView.ViewHolder {
+    class CarrinhoViewHolder extends RecyclerView.ViewHolder {
         private final ImageView itemImage;
         private final TextView itemName;
         private final TextView itemPrice;
         private final TextView itemQuantity;
         private final ImageButton deleteButton;
 
-        public CartViewHolder(@NonNull View itemView) {
+        public CarrinhoViewHolder(@NonNull View itemView) {
             super(itemView);
-            // CORREÇÃO: Usando os IDs corretos do layout list_item_carrinho.xml
             itemImage = itemView.findViewById(R.id.carrinho_item_image);
             itemName = itemView.findViewById(R.id.carrinho_item_name);
             itemPrice = itemView.findViewById(R.id.carrinho_item_price);
@@ -90,7 +86,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                 itemImage.setImageResource(R.drawable.ic_launcher_background);
             }
 
-            // Lógica apenas para o botão de deletar, que é o que existe no layout
             deleteButton.setOnClickListener(v -> {
                 int position = getAdapterPosition();
                 if (position != RecyclerView.NO_POSITION) {
@@ -113,7 +108,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                     items.remove(position);
                     notifyItemRemoved(position);
                     notifyItemRangeChanged(position, items.size());
-                    // Atualiza o total na activity após remover um item
                     updateTotalCallback.accept(items);
                 }
             }.execute();

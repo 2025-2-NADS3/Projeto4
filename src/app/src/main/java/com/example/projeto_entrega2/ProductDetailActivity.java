@@ -59,12 +59,17 @@ public class ProductDetailActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle(""); // Título da barra de ferramentas fica em branco
         }
     }
 
     private void populateProductData() {
         CollapsingToolbarLayout collapsingToolbar = findViewById(R.id.collapsing_toolbar);
-        collapsingToolbar.setTitle(currentProduct.getNome());
+        collapsingToolbar.setTitle(""); // Título da barra que recolhe também fica em branco
+
+        // NOVOS CAMPOS
+        TextView nameTextView = findViewById(R.id.detail_product_name);
+        nameTextView.setText(currentProduct.getNome());
 
         ImageView imageView = findViewById(R.id.detail_product_image);
         TextView priceTextView = findViewById(R.id.detail_product_price);

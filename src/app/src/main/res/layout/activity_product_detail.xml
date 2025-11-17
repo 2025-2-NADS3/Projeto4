@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ProductDetailActivity">
 
-    <!-- AppBar e Imagem (sem alterações) -->
+    <!-- AppBar e Imagem (Título será removido daqui) -->
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
@@ -36,7 +36,7 @@
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <!-- Conteúdo da tela (sem alterações) -->
+    <!-- Conteúdo da tela (Título será adicionado aqui) -->
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -49,13 +49,23 @@
             android:orientation="vertical"
             android:padding="16dp">
 
+            <!-- NOVO TEXTVIEW PARA O TÍTULO -->
+            <TextView
+                android:id="@+id/detail_product_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                tools:text="Nome do Produto" />
+
             <TextView
                 android:id="@+id/detail_product_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:textColor="?attr/colorPrimary"
-                android:textSize="24sp"
-                android:textStyle="bold"
+                android:textSize="20sp" 
                 tools:text="R$ 25,00" />
 
             <TextView
@@ -70,7 +80,7 @@
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <!-- NOVA BARRA INFERIOR -->
+    <!-- Barra Inferior (sem alterações) -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

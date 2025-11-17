@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.projeto_entrega2.database.AppDatabase;
-import com.example.projeto_entrega2.model.User;
+import com.example.projeto_entrega2.model.Usuario;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -30,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowTitleEnabled(false);
+            getSupportActionBar().setTitle("Login");
         }
 
         db = AppDatabase.getDatabase(getApplicationContext());
@@ -57,36 +57,35 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        new LoginAsyncTask(db).execute(email, password);
+        // Executa a tarefa de login com os dados corretos
+        new LoginAsyncTask().execute(email, password);
     }
 
-    private class LoginAsyncTask extends AsyncTask<String, Void, User> {
-        private AppDatabase db;
-        private String passwordInput;
+    // AsyncTask corrigida para usar Usuario e usuarioDAO
+    private class LoginAsyncTask extends AsyncTask<String, Void, Usuario> {
 
-        LoginAsyncTask(AppDatabase db) {
-            this.db = db;
+        @Override
+        protected Usuario doInBackground(String... params) {
+            String email = params[0];
+            String password = params[1];
+            // CORREÇÃO: Usando usuarioDAO e findByEmailAndPassword
+            return db.usuarioDAO().findByEmailAndPassword(email, password);
         }
 
         @Override
-        protected User doInBackground(String... params) {
-            passwordInput = params[1];
-            return db.userDAO().findByEmail(params[0]);
-        }
-
-        @Override
-        protected void onPostExecute(User user) {
-            if (user != null && user.getPassword().equals(passwordInput)) {
+        protected void onPostExecute(Usuario usuario) {
+            if (usuario != null) {
                 Toast.makeText(LoginActivity.this, "Login bem-sucedido!", Toast.LENGTH_SHORT).show();
 
-                if ("CANTINA".equals(user.getProfileType())) {
+                // CORREÇÃO: Usando isCantina() para verificar o perfil
+                if (usuario.isCantina()) {
                     Intent intent = new Intent(LoginActivity.this, CantinaPainelActivity.class);
                     startActivity(intent);
                 } else {
                     Intent intent = new Intent(LoginActivity.this, VitrineActivity.class);
                     startActivity(intent);
                 }
-                finish();
+                finish(); // Fecha a tela de login após o sucesso
             } else {
                 Toast.makeText(LoginActivity.this, "Email ou senha inválidos.", Toast.LENGTH_LONG).show();
             }

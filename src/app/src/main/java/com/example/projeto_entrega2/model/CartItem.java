@@ -3,63 +3,46 @@ package com.example.projeto_entrega2.model;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "tabela_carrinho")
+@Entity(tableName = "cart_items")
 public class CartItem {
 
     @PrimaryKey
     private int productId;
-
     private String productName;
-    private double productPrice;
-    private String productImageUrl;
+    private double price;
+    private String imageUrl;
     private int quantity;
 
-    // Construtor, getters e setters
-
-    public CartItem(int productId, String productName, double productPrice, String productImageUrl, int quantity) {
+    public CartItem(int productId, String productName, double price, String imageUrl, int quantity) {
         this.productId = productId;
         this.productName = productName;
-        this.productPrice = productPrice;
-        this.productImageUrl = productImageUrl;
+        this.price = price;
+        this.imageUrl = imageUrl;
         this.quantity = quantity;
     }
 
+    // Getters
     public int getProductId() {
         return productId;
-    }
-
-    public void setProductId(int productId) {
-        this.productId = productId;
     }
 
     public String getProductName() {
         return productName;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public double getPrice() {
+        return price;
     }
 
-    public double getProductPrice() {
-        return productPrice;
-    }
-
-    public void setProductPrice(double productPrice) {
-        this.productPrice = productPrice;
-    }
-
-    public String getProductImageUrl() {
-        return productImageUrl;
-    }
-
-    public void setProductImageUrl(String productImageUrl) {
-        this.productImageUrl = productImageUrl;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
     public int getQuantity() {
         return quantity;
     }
 
+    // Setters
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
