@@ -1,5 +1,6 @@
 package com.example.projeto_entrega2.adapter;
 
+import android.content.Context;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,8 +21,20 @@ import java.util.Locale;
 
 public class ProdutoAdapter extends RecyclerView.Adapter<ProdutoAdapter.ProdutoViewHolder> {
 
-    private List<Produto> listaProdutos = new ArrayList<>();
+    private List<Produto> listaProdutos;
     private OnItemClickListener listener;
+    private Context context;
+
+    // CONSTRUTOR CORRIGIDO: Aceita a lista e o contexto
+    public ProdutoAdapter(Context context, List<Produto> productList) {
+        this.context = context;
+        this.listaProdutos = productList;
+    }
+
+    // Construtor antigo mantido para compatibilidade
+    public ProdutoAdapter() {
+        this.listaProdutos = new ArrayList<>();
+    }
 
     public interface OnItemClickListener {
         void onItemClick(Produto produto);
@@ -61,7 +74,7 @@ public class ProdutoAdapter extends RecyclerView.Adapter<ProdutoAdapter.ProdutoV
 
     @Override
     public int getItemCount() {
-        return listaProdutos.size();
+        return listaProdutos != null ? listaProdutos.size() : 0;
     }
 
     public void setProdutos(List<Produto> produtos) {

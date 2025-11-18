@@ -10,7 +10,7 @@ import android.view.MenuItem;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projeto_entrega2.adapter.ProdutoAdapter;
@@ -18,11 +18,14 @@ import com.example.projeto_entrega2.database.AppDatabase;
 import com.example.projeto_entrega2.model.Produto;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SearchActivity extends AppCompatActivity {
 
-    private ProdutoAdapter adapter;
+    private RecyclerView searchRecyclerView;
+    private ProdutoAdapter produtoAdapter;
+    private List<Produto> productList = new ArrayList<>();
     private AppDatabase db;
 
     @Override
@@ -35,54 +38,51 @@ public class SearchActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setTitle("");
+            getSupportActionBar().setTitle("Pesquisar Produtos");
         }
 
-        RecyclerView recyclerView = findViewById(R.id.recycler_view_search);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new ProdutoAdapter();
-        recyclerView.setAdapter(adapter);
+        setupRecyclerView();
+        setupBottomNavigationView();
+    }
 
-        adapter.setOnItemClickListener(produto -> {
-            Intent intent = new Intent(SearchActivity.this, ProductDetailActivity.class);
-            intent.putExtra(ProductDetailActivity.EXTRA_PRODUCT, produto);
-            startActivity(intent);
-        });
+    private void setupRecyclerView() {
+        searchRecyclerView = findViewById(R.id.recycler_view_search);
+        searchRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        produtoAdapter = new ProdutoAdapter(this, productList);
+        searchRecyclerView.setAdapter(produtoAdapter);
+    }
 
-        // --- Lógica do Menu de Navegação Inferior ---
+    private void setupBottomNavigationView() {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.nav_search);
+
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
+            if (itemId == R.id.nav_search) {
+                return true; // Não faz nada, já estamos aqui
+            }
+
+            Intent intent = null;
             if (itemId == R.id.nav_home) {
-                startActivity(new Intent(getApplicationContext(), VitrineActivity.class));
-                overridePendingTransition(0, 0);
-                finish();
-                return true;
-            } else if (itemId == R.id.nav_search) {
-                return true;
-            } else if (itemId == R.id.nav_coupons) {
-                startActivity(new Intent(getApplicationContext(), CouponsActivity.class));
-                overridePendingTransition(0, 0);
-                finish();
-                return true;
+                intent = new Intent(this, VitrineActivity.class);
             } else if (itemId == R.id.nav_orders) {
-                startActivity(new Intent(getApplicationContext(), OrdersActivity.class));
-                overridePendingTransition(0, 0);
-                finish();
-                return true;
+                intent = new Intent(this, OrdersActivity.class);
+            } else if (itemId == R.id.nav_coupons) {
+                intent = new Intent(this, CouponsActivity.class);
             } else if (itemId == R.id.nav_profile) {
-                startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                intent = new Intent(this, ProfileActivity.class);
+            }
+
+            if (intent != null) {
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
                 overridePendingTransition(0, 0);
-                finish();
                 return true;
             }
             return false;
         });
     }
 
-    // ... (outros métodos permanecem iguais)
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -91,14 +91,11 @@ public class SearchActivity extends AppCompatActivity {
         MenuItem searchItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) searchItem.getActionView();
 
-        searchItem.expandActionView();
-        searchView.setIconified(false);
-        searchView.requestFocus();
-
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                return false;
+                performSearch(query);
+                return true;
             }
 
             @Override
@@ -119,18 +116,18 @@ public class SearchActivity extends AppCompatActivity {
     private class SearchAsyncTask extends AsyncTask<String, Void, List<Produto>> {
         @Override
         protected List<Produto> doInBackground(String... params) {
+            if (params.length == 0) return new ArrayList<>();
+            // CORREÇÃO: Usando o nome correto do método do DAO
             return db.produtoDAO().searchProducts(params[0]);
         }
 
         @Override
         protected void onPostExecute(List<Produto> produtos) {
-            adapter.setProdutos(produtos);
+            productList.clear();
+            if (produtos != null) {
+                productList.addAll(produtos);
+            }
+            produtoAdapter.notifyDataSetChanged();
         }
-    }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        finish(); 
-        return true;
     }
 }

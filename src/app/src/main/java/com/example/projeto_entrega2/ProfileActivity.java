@@ -21,29 +21,29 @@ public class ProfileActivity extends AppCompatActivity {
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.nav_profile);
+
+        // CORREÇÃO: Lógica de navegação com flags para limpar a pilha de telas
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
+            if (itemId == R.id.nav_profile) {
+                return true; // Não faz nada, já estamos aqui
+            }
+
+            Intent intent = null;
             if (itemId == R.id.nav_home) {
-                startActivity(new Intent(getApplicationContext(), VitrineActivity.class));
-                overridePendingTransition(0, 0);
-                finish();
-                return true;
+                intent = new Intent(this, VitrineActivity.class);
             } else if (itemId == R.id.nav_search) {
-                startActivity(new Intent(getApplicationContext(), SearchActivity.class));
-                overridePendingTransition(0, 0);
-                finish();
-                return true;
-            } else if (itemId == R.id.nav_coupons) {
-                startActivity(new Intent(getApplicationContext(), CouponsActivity.class));
-                overridePendingTransition(0, 0);
-                finish();
-                return true;
+                intent = new Intent(this, SearchActivity.class);
             } else if (itemId == R.id.nav_orders) {
-                startActivity(new Intent(getApplicationContext(), OrdersActivity.class));
+                intent = new Intent(this, OrdersActivity.class);
+            } else if (itemId == R.id.nav_coupons) {
+                intent = new Intent(this, CouponsActivity.class);
+            }
+
+            if (intent != null) {
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
                 overridePendingTransition(0, 0);
-                finish();
-                return true;
-            } else if (itemId == R.id.nav_profile) {
                 return true;
             }
             return false;

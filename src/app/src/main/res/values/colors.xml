@@ -13,4 +13,10 @@
     <!-- Nova Paleta de Cores Minimalista -->
     <color name="green_primary">#14492D</color>
     <color name="green_dark">#0E331F</color>
+
+    <!-- NOVAS CORES PARA STATUS DE PEDIDO -->
+    <color name="status_pending">#FF9800</color> <!-- Laranja -->
+    <color name="status_ready">#4CAF50</color>   <!-- Verde -->
+    <color name="status_delivered">#607D8B</color> <!-- Cinza Azulado -->
+    <color name="status_cancelled">#F44336</color> <!-- Vermelho -->
 </resources>

@@ -1,23 +1,25 @@
 package com.example.projeto_entrega2;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.projeto_entrega2.adapter.MyOrdersAdapter;
+import com.example.projeto_entrega2.adapter.OrderAdapter;
 import com.example.projeto_entrega2.database.AppDatabase;
 import com.example.projeto_entrega2.model.Order;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class OrdersActivity extends AppCompatActivity {
 
-    private RecyclerView recyclerView;
-    private MyOrdersAdapter adapter;
+    private RecyclerView ordersRecyclerView;
+    private OrderAdapter orderAdapter;
+    private List<Order> orderList = new ArrayList<>();
     private AppDatabase db;
 
     @Override
@@ -34,39 +36,72 @@ public class OrdersActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        recyclerView = findViewById(R.id.recycler_view_my_orders);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        // --- Configuração do RecyclerView ---
+        ordersRecyclerView = findViewById(R.id.recycler_view_my_orders);
+        ordersRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        orderAdapter = new OrderAdapter(this, orderList);
+        ordersRecyclerView.setAdapter(orderAdapter);
 
-        adapter = new MyOrdersAdapter();
-        recyclerView.setAdapter(adapter);
+        // Carrega os pedidos
+        loadOrders();
 
-        loadUserOrders();
+        // --- Lógica do Menu de Navegação Inferior (ADICIONADA) ---
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setSelectedItemId(R.id.nav_orders);
+
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            int itemId = item.getItemId();
+            if (itemId == R.id.nav_orders) {
+                return true; // Não faz nada, já estamos aqui
+            } else if (itemId == R.id.nav_home) {
+                startActivity(new Intent(getApplicationContext(), VitrineActivity.class));
+                overridePendingTransition(0, 0);
+                return true;
+            } else if (itemId == R.id.nav_search) {
+                startActivity(new Intent(getApplicationContext(), SearchActivity.class));
+                overridePendingTransition(0, 0);
+                return true;
+            } else if (itemId == R.id.nav_coupons) {
+                startActivity(new Intent(getApplicationContext(), CouponsActivity.class));
+                overridePendingTransition(0, 0);
+                return true;
+            } else if (itemId == R.id.nav_profile) {
+                startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                overridePendingTransition(0, 0);
+                return true;
+            }
+            return false;
+        });
     }
 
-    private void loadUserOrders() {
-        // ATENÇÃO: O userId está fixo como 1L. O ideal é obter o ID do usuário logado.
-        long userId = 1L;
-        new LoadUserOrdersAsyncTask().execute(userId);
+    private void loadOrders() {
+        // ATENÇÃO: Carregando todos os pedidos. Idealmente, filtrar por usuário logado.
+        new LoadOrdersAsyncTask().execute();
     }
 
-    private class LoadUserOrdersAsyncTask extends AsyncTask<Long, Void, List<Order>> {
+    private class LoadOrdersAsyncTask extends AsyncTask<Void, Void, List<Order>> {
         @Override
-        protected List<Order> doInBackground(Long... userIds) {
-            if (userIds.length == 0) return null;
-            return db.orderDAO().getOrdersByUserId(userIds[0]);
+        protected List<Order> doInBackground(Void... voids) {
+            // Supondo que o método para buscar todos os pedidos se chame getAllOrders(). Verifique seu OrderDAO.
+            return db.orderDAO().getAllOrders(); 
         }
 
         @Override
         protected void onPostExecute(List<Order> orders) {
             if (orders != null) {
-                adapter.setOrders(orders);
+                orderList.clear();
+                orderList.addAll(orders);
+                orderAdapter.notifyDataSetChanged();
             }
         }
     }
 
     @Override
     public boolean onSupportNavigateUp() {
-        onBackPressed();
+        // Usa a navegação da BottomNavigationView em vez de voltar
+        startActivity(new Intent(getApplicationContext(), VitrineActivity.class));
+        overridePendingTransition(0, 0);
+        finish();
         return true;
     }
 }

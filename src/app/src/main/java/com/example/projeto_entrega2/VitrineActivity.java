@@ -28,7 +28,7 @@ public class VitrineActivity extends AppCompatActivity implements View.OnClickLi
             getSupportActionBar().setTitle("Comedoria da Tia");
         }
 
-        // --- Listeners para os cards (TIPOS CORRIGIDOS) ---
+        // --- Listeners para os cards ---
         CardView searchBar = findViewById(R.id.search_bar_card);
         LinearLayout cardSalgados = findViewById(R.id.cardSalgados);
         LinearLayout cardDoces = findViewById(R.id.cardDoces);
@@ -41,32 +41,28 @@ public class VitrineActivity extends AppCompatActivity implements View.OnClickLi
         cardBebidas.setOnClickListener(this);
         cardRefeicoes.setOnClickListener(this);
 
-        // --- Lógica do Menu de Navegação Inferior ---
+        // --- Lógica do Menu de Navegação Inferior (CORRIGIDA) ---
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.nav_home);
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
             if (itemId == R.id.nav_home) {
-                return true;
+                return true; // Não faz nada, já estamos aqui
             } else if (itemId == R.id.nav_search) {
                 startActivity(new Intent(getApplicationContext(), SearchActivity.class));
                 overridePendingTransition(0, 0);
-                finish();
                 return true;
             } else if (itemId == R.id.nav_coupons) {
                 startActivity(new Intent(getApplicationContext(), CouponsActivity.class));
                 overridePendingTransition(0, 0);
-                finish();
                 return true;
             } else if (itemId == R.id.nav_orders) {
                 startActivity(new Intent(getApplicationContext(), OrdersActivity.class));
                 overridePendingTransition(0, 0);
-                finish();
                 return true;
             } else if (itemId == R.id.nav_profile) {
                 startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                 overridePendingTransition(0, 0);
-                finish();
                 return true;
             }
             return false;
@@ -108,8 +104,10 @@ public class VitrineActivity extends AppCompatActivity implements View.OnClickLi
             category = "Refeições";
         }
 
-        Intent intent = new Intent(VitrineActivity.this, ProductListActivity.class);
-        intent.putExtra(ProductListActivity.EXTRA_CATEGORY, category);
-        startActivity(intent);
+        if (!category.isEmpty()) {
+            Intent intent = new Intent(VitrineActivity.this, ProductListActivity.class);
+            intent.putExtra(ProductListActivity.EXTRA_CATEGORY, category);
+            startActivity(intent);
+        }
     }
 }
