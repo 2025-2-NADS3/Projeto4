@@ -59,24 +59,23 @@ public class CheckoutActivity extends AppCompatActivity {
     }
 
     private String generatePickupCode() {
-        return UUID.randomUUID().toString().substring(0, 4).toUpperCase();
+        return UUID.randomUUID().toString().substring(0, 6).toUpperCase();
     }
 
-    private class FinalizeOrderAsyncTask extends AsyncTask<Void, Void, Boolean> {
+    private class FinalizeOrderAsyncTask extends AsyncTask<Void, Void, Long> {
 
         private List<CartItem> cartItems;
 
         @Override
-        protected Boolean doInBackground(Void... voids) {
+        protected Long doInBackground(Void... voids) {
             cartItems = db.cartItemDAO().getAll();
             if (cartItems == null || cartItems.isEmpty()) {
-                return false;
+                return -1L; // Retorna -1 se o carrinho estiver vazio
             }
 
             Gson gson = new Gson();
             String itemsJson = gson.toJson(cartItems);
 
-            // CORREÇÃO: Gerando o código de retirada
             String pickupCode = generatePickupCode();
             long userId = 1L; // ATENÇÃO: O userId está fixo
             String status = "Pendente";
@@ -84,18 +83,19 @@ public class CheckoutActivity extends AppCompatActivity {
             
             Order newOrder = new Order(userId, itemsJson, totalAmount, status, timestamp, pickupCode);
 
-            db.orderDAO().insert(newOrder);
+            long newOrderId = db.orderDAO().insert(newOrder);
             db.cartItemDAO().deleteAll();
 
-            return true;
+            return newOrderId;
         }
 
         @Override
-        protected void onPostExecute(Boolean success) {
-            super.onPostExecute(success);
-            if (success) {
-                Toast.makeText(CheckoutActivity.this, "Pedido confirmado com sucesso!", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(CheckoutActivity.this, VitrineActivity.class);
+        protected void onPostExecute(Long newOrderId) {
+            super.onPostExecute(newOrderId);
+            if (newOrderId != -1L) {
+                Toast.makeText(CheckoutActivity.this, "Pedido confirmado com sucesso!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(CheckoutActivity.this, OrderStatusActivity.class);
+                intent.putExtra(OrderStatusActivity.EXTRA_ORDER_ID, newOrderId);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 finish();
