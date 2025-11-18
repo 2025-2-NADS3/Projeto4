@@ -1,5 +1,6 @@
 package com.example.projeto_entrega2;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -59,15 +60,14 @@ public class ProductDetailActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setTitle(""); // Título da barra de ferramentas fica em branco
+            getSupportActionBar().setTitle("");
         }
     }
 
     private void populateProductData() {
         CollapsingToolbarLayout collapsingToolbar = findViewById(R.id.collapsing_toolbar);
-        collapsingToolbar.setTitle(""); // Título da barra que recolhe também fica em branco
+        collapsingToolbar.setTitle("");
 
-        // NOVOS CAMPOS
         TextView nameTextView = findViewById(R.id.detail_product_name);
         nameTextView.setText(currentProduct.getNome());
 
@@ -140,7 +140,11 @@ public class ProductDetailActivity extends AppCompatActivity {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             Toast.makeText(ProductDetailActivity.this, quantity + " item(s) adicionado(s)!", Toast.LENGTH_SHORT).show();
-            finish(); // Volta para a lista de produtos
+            
+            // CORREÇÃO: Redireciona para o carrinho em vez de apenas fechar a tela
+            Intent intent = new Intent(ProductDetailActivity.this, CarrinhoActivity.class);
+            startActivity(intent);
+            finish(); 
         }
     }
 

@@ -9,7 +9,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import com.example.projeto_entrega2.database.AppDatabase;
 import com.example.projeto_entrega2.model.Usuario;
@@ -26,12 +25,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setTitle("Login");
-        }
+        // O código da Toolbar foi removido pois ela não existe mais no layout
 
         db = AppDatabase.getDatabase(getApplicationContext());
 
@@ -40,12 +34,6 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.btnLogin);
 
         btnLogin.setOnClickListener(v -> loginUsuario());
-    }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
     }
 
     private void loginUsuario() {
@@ -57,18 +45,15 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        // Executa a tarefa de login com os dados corretos
         new LoginAsyncTask().execute(email, password);
     }
 
-    // AsyncTask corrigida para usar Usuario e usuarioDAO
     private class LoginAsyncTask extends AsyncTask<String, Void, Usuario> {
 
         @Override
         protected Usuario doInBackground(String... params) {
             String email = params[0];
             String password = params[1];
-            // CORREÇÃO: Usando usuarioDAO e findByEmailAndPassword
             return db.usuarioDAO().findByEmailAndPassword(email, password);
         }
 
@@ -77,7 +62,6 @@ public class LoginActivity extends AppCompatActivity {
             if (usuario != null) {
                 Toast.makeText(LoginActivity.this, "Login bem-sucedido!", Toast.LENGTH_SHORT).show();
 
-                // CORREÇÃO: Usando isCantina() para verificar o perfil
                 if (usuario.isCantina()) {
                     Intent intent = new Intent(LoginActivity.this, CantinaPainelActivity.class);
                     startActivity(intent);
@@ -85,7 +69,7 @@ public class LoginActivity extends AppCompatActivity {
                     Intent intent = new Intent(LoginActivity.this, VitrineActivity.class);
                     startActivity(intent);
                 }
-                finish(); // Fecha a tela de login após o sucesso
+                finish();
             } else {
                 Toast.makeText(LoginActivity.this, "Email ou senha inválidos.", Toast.LENGTH_LONG).show();
             }
