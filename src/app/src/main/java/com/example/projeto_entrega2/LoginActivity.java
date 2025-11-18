@@ -30,14 +30,14 @@ public class LoginActivity extends AppCompatActivity {
         editTextEmail = findViewById(R.id.editTextLoginEmail);
         editTextPassword = findViewById(R.id.editTextLoginPassword);
         Button btnLogin = findViewById(R.id.btnLogin);
-        ImageButton backButton = findViewById(R.id.back_button_login);
+        //ImageButton backButton = findViewById(R.id.back_button_login);
 
         btnLogin.setOnClickListener(v -> loginUser());
 
         // Ação para o botão de voltar
-        backButton.setOnClickListener(v -> {
+        /*backButton.setOnClickListener(v -> {
             onBackPressed(); // Volta para a tela anterior (AuthSelectionActivity)
-        });
+        });*/
     }
 
     private void loginUser() {

@@ -5,52 +5,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
-    android:padding="32dp"
     tools:context=".LoginActivity">
 
-    <!-- Seta de Voltar -->
-    <ImageButton
-        android:id="@+id/back_button_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="?attr/homeAsUpIndicator"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:contentDescription="Voltar"
-        app:tint="@android:color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <!-- O Toolbar foi removido para dar espaço ao logo -->
 
     <ImageView
         android:id="@+id/logo"
         android:layout_width="0dp"
         android:layout_height="80dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="64dp"
         android:contentDescription="@string/app_name"
-        android:src="@drawable/logo_horizontal" 
+        android:src="@drawable/logo_horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/title_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="Login"
-        android:textColor="@android:color/black"
-        android:textSize="28sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/editTextLoginEmail"
-        app:layout_constraintTop_toBottomOf="@+id/logo" />
 
     <EditText
         android:id="@+id/editTextLoginEmail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="48dp"
         android:layout_marginEnd="32dp"
         android:background="@drawable/edit_text_background"
         android:hint="Email"
@@ -58,7 +35,7 @@
         android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_login" />
+        app:layout_constraintTop_toBottomOf="@+id/logo" />
 
     <EditText
         android:id="@+id/editTextLoginPassword"
