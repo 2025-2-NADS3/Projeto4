@@ -9,19 +9,15 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
-import androidx.appcompat.widget.Toolbar;
 
 import com.example.projeto_entrega2.database.AppDatabase;
 import com.example.projeto_entrega2.model.Usuario;
 
 public class CadastroActivity extends AppCompatActivity {
 
-    private EditText nomeCompletoEditText;
-    private EditText nomeUsuarioEditText;
-    private EditText emailEditText;
-    private EditText senhaEditText;
-    private EditText confirmarSenhaEditText;
-    private SwitchCompat isCantinaSwitch; // NOVO SWITCH
+    private EditText editTextNomeCompleto, editTextNomeUsuario, editTextEmail, editTextSenha, editTextConfirmarSenha;
+    private SwitchCompat switchIsCantina;
+    private Button buttonCriarConta;
     private AppDatabase db;
 
     @Override
@@ -31,33 +27,26 @@ public class CadastroActivity extends AppCompatActivity {
 
         db = AppDatabase.getDatabase(getApplicationContext());
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setTitle("Cadastro");
-        }
+        editTextNomeCompleto = findViewById(R.id.edit_text_nome_completo);
+        editTextNomeUsuario = findViewById(R.id.edit_text_nome_usuario);
+        editTextEmail = findViewById(R.id.edit_text_email);
+        editTextSenha = findViewById(R.id.edit_text_senha);
+        editTextConfirmarSenha = findViewById(R.id.edit_text_confirmar_senha);
+        switchIsCantina = findViewById(R.id.switch_is_cantina);
+        buttonCriarConta = findViewById(R.id.button_criar_conta);
 
-        nomeCompletoEditText = findViewById(R.id.edit_text_nome_completo);
-        nomeUsuarioEditText = findViewById(R.id.edit_text_nome_usuario);
-        emailEditText = findViewById(R.id.edit_text_email);
-        senhaEditText = findViewById(R.id.edit_text_senha);
-        confirmarSenhaEditText = findViewById(R.id.edit_text_confirmar_senha);
-        isCantinaSwitch = findViewById(R.id.switch_is_cantina); // OBTENDO A REFERÊNCIA
-
-        Button criarContaButton = findViewById(R.id.button_criar_conta);
-        criarContaButton.setOnClickListener(v -> cadastrarUsuario());
+        buttonCriarConta.setOnClickListener(v -> criarNovaConta());
     }
 
-    private void cadastrarUsuario() {
-        String nomeCompleto = nomeCompletoEditText.getText().toString().trim();
-        String nomeUsuario = nomeUsuarioEditText.getText().toString().trim();
-        String email = emailEditText.getText().toString().trim();
-        String senha = senhaEditText.getText().toString().trim();
-        String confirmarSenha = confirmarSenhaEditText.getText().toString().trim();
-        boolean isCantina = isCantinaSwitch.isChecked(); // LENDO O VALOR DO SWITCH
+    private void criarNovaConta() {
+        String nomeCompleto = editTextNomeCompleto.getText().toString().trim();
+        String nomeUsuario = editTextNomeUsuario.getText().toString().trim();
+        String email = editTextEmail.getText().toString().trim();
+        String senha = editTextSenha.getText().toString().trim();
+        String confirmarSenha = editTextConfirmarSenha.getText().toString().trim();
+        boolean isCantina = switchIsCantina.isChecked();
 
-        if (TextUtils.isEmpty(nomeCompleto) || TextUtils.isEmpty(nomeUsuario) || TextUtils.isEmpty(email) || TextUtils.isEmpty(senha) || TextUtils.isEmpty(confirmarSenha)) {
+        if (TextUtils.isEmpty(nomeCompleto) || TextUtils.isEmpty(nomeUsuario) || TextUtils.isEmpty(email) || TextUtils.isEmpty(senha)) {
             Toast.makeText(this, "Por favor, preencha todos os campos", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -67,10 +56,9 @@ public class CadastroActivity extends AppCompatActivity {
             return;
         }
 
-        // TODO: Adicionar verificação se usuário ou email já existem
-
-        // CORREÇÃO: Usando o valor do Switch para definir o tipo de conta
+        // CORREÇÃO DEFINITIVA: Usando o construtor correto para criar o objeto Usuario
         Usuario novoUsuario = new Usuario(nomeCompleto, nomeUsuario, email, senha, isCantina);
+
         new InsertUsuarioAsyncTask().execute(novoUsuario);
     }
 
@@ -85,13 +73,7 @@ public class CadastroActivity extends AppCompatActivity {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             Toast.makeText(CadastroActivity.this, "Conta criada com sucesso!", Toast.LENGTH_SHORT).show();
-            finish(); // Fecha a tela de cadastro
+            finish();
         }
-    }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
     }
 }

@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -55,6 +56,13 @@ public class CantinaPainelActivity extends AppCompatActivity {
         fab.setOnClickListener(v -> {
             Intent intent = new Intent(CantinaPainelActivity.this, AddEditProductActivity.class);
             startActivityForResult(intent, ADD_PRODUCT_REQUEST);
+        });
+
+        // CORREÇÃO: Ligando o novo botão para gerenciar pedidos
+        Button manageOrdersButton = findViewById(R.id.button_manage_orders);
+        manageOrdersButton.setOnClickListener(v -> {
+            Intent intent = new Intent(CantinaPainelActivity.this, ManageOrdersActivity.class);
+            startActivity(intent);
         });
 
         setupRecyclerView();

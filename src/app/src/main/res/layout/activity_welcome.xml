@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
+    tools:context=".WelcomeActivity">
+
+    <!-- LOGO NA PARTE SUPERIOR (SOBRE O GRADIENTE) -->
+
+    <!-- FUNDO BRANCO PARA A PARTE INFERIOR -->
+    <ImageView
+        android:id="@+id/logo_comedoria"
+        android:layout_width="218dp"
+        android:layout_height="210dp"
+        android:contentDescription="Logo Comedoria"
+        android:src="@drawable/logo"
+        app:layout_constraintBottom_toTopOf="@+id/white_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.585"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/white_background"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@android:color/white"
+        app:layout_constraintTop_toTopOf="@+id/guideline"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- LINHA GUIA PARA DIVIDIR A TELA (EX: 55% PARA O GRADIENTE, 45% PARA O BRANCO) -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.73" />
+
+    <!-- TEXTO "Vamos Começar!" POSICIONADO SOBRE O FUNDO BRANCO -->
+    <TextView
+        android:id="@+id/text_view_welcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vamos Começar!"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="#555555"
+        app:layout_constraintTop_toTopOf="@+id/white_background"
+        app:layout_constraintBottom_toTopOf="@+id/button_continue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintVertical_bias="0.4" />
+
+    <!-- BOTÃO CONTINUE POSICIONADO SOBRE O FUNDO BRANCO -->
+    <Button
+        android:id="@+id/button_continue"
+        android:layout_width="250dp"
+        android:layout_height="48dp"
+        android:text="Continue  →"
+        android:textAllCaps="false"
+        android:backgroundTint="#1E5631"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="24dp"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_welcome"
+        app:layout_constraintBottom_toBottomOf="@+id/white_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

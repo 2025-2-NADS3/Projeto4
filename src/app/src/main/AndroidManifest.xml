@@ -16,9 +16,9 @@
         android:theme="@style/Theme.Projeto_entrega2"
         tools:targetApi="31">
 
-        <!-- CORREÇÃO: AuthSelectionActivity agora é a tela de início -->
+        <!-- CORREÇÃO: WelcomeActivity agora é a tela de início -->
         <activity
-            android:name=".AuthSelectionActivity"
+            android:name=".WelcomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,6 +27,7 @@
         </activity>
 
         <!-- Outras activities -->
+        <activity android:name=".AuthSelectionActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".VitrineActivity" />
         <activity android:name=".CadastroActivity" />
@@ -39,6 +40,8 @@
         <activity android:name=".CouponsActivity" />
         <activity android:name=".OrdersActivity" />
         <activity android:name=".ProfileActivity" />
+        <activity android:name=".AddEditProductActivity" />
+        <activity android:name=".ManageOrdersActivity" />
 
     </application>
 

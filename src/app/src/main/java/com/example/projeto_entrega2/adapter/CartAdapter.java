@@ -28,7 +28,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     private final Consumer<List<CartItem>> updateTotalCallback;
     private final Context context;
 
-    // Construtor alinhado com a CarrinhoActivity
     public CartAdapter(Context context, Consumer<List<CartItem>> updateTotalCallback) {
         this.context = context;
         this.updateTotalCallback = updateTotalCallback;
@@ -55,30 +54,36 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     public void setItems(List<CartItem> cartItems) {
         this.items = cartItems;
         notifyDataSetChanged();
-        // Garante que o total seja atualizado quando os itens são carregados
         updateTotalCallback.accept(items);
+    }
+
+    private void updateItem(CartItem item) {
+        new UpdateCartItemAsyncTask().execute(item);
+    }
+
+    private void deleteItem(CartItem item, int position) {
+        new DeleteCartItemAsyncTask(position).execute(item);
     }
 
     class CartViewHolder extends RecyclerView.ViewHolder {
         private final ImageView itemImage;
-        private final TextView itemName;
-        private final TextView itemPrice;
-        private final TextView itemQuantity;
-        private final ImageButton deleteButton;
+        private final TextView itemName, itemPrice, itemQuantity;
+        private final ImageButton increaseButton, decreaseButton, deleteButton;
 
         public CartViewHolder(@NonNull View itemView) {
             super(itemView);
-            // CORREÇÃO: Usando os IDs corretos do layout list_item_carrinho.xml
             itemImage = itemView.findViewById(R.id.carrinho_item_image);
             itemName = itemView.findViewById(R.id.carrinho_item_name);
             itemPrice = itemView.findViewById(R.id.carrinho_item_price);
             itemQuantity = itemView.findViewById(R.id.carrinho_item_quantity);
+            increaseButton = itemView.findViewById(R.id.button_increase_quantity);
+            decreaseButton = itemView.findViewById(R.id.button_decrease_quantity);
             deleteButton = itemView.findViewById(R.id.carrinho_item_delete);
         }
 
         public void bind(final CartItem cartItem) {
             itemName.setText(cartItem.getProductName());
-            itemQuantity.setText("Qtd: " + cartItem.getQuantity());
+            itemQuantity.setText(String.valueOf(cartItem.getQuantity()));
 
             Locale ptBr = new Locale("pt", "BR");
             NumberFormat formatoMoeda = NumberFormat.getCurrencyInstance(ptBr);
@@ -90,33 +95,75 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                 itemImage.setImageResource(R.drawable.ic_launcher_background);
             }
 
-            // Lógica apenas para o botão de deletar, que é o que existe no layout
             deleteButton.setOnClickListener(v -> {
                 int position = getAdapterPosition();
                 if (position != RecyclerView.NO_POSITION) {
-                    CartItem itemToDelete = items.get(position);
-                    deleteItemFromDb(itemToDelete, position);
+                    deleteItem(items.get(position), position);
+                }
+            });
+
+            increaseButton.setOnClickListener(v -> {
+                int position = getAdapterPosition();
+                if (position != RecyclerView.NO_POSITION) {
+                    CartItem item = items.get(position);
+                    item.setQuantity(item.getQuantity() + 1);
+                    updateItem(item);
+                    notifyItemChanged(position);
+                    updateTotalCallback.accept(items);
+                }
+            });
+
+            decreaseButton.setOnClickListener(v -> {
+                int position = getAdapterPosition();
+                if (position != RecyclerView.NO_POSITION) {
+                    CartItem item = items.get(position);
+                    if (item.getQuantity() > 1) {
+                        item.setQuantity(item.getQuantity() - 1);
+                        updateItem(item);
+                        notifyItemChanged(position);
+                        updateTotalCallback.accept(items);
+                    } else {
+                        // Se a quantidade é 1, remover o item
+                        deleteItem(item, position);
+                    }
                 }
             });
         }
+    }
 
-        private void deleteItemFromDb(final CartItem cartItem, final int position) {
-            new AsyncTask<Void, Void, Void>() {
-                @Override
-                protected Void doInBackground(Void... voids) {
-                    AppDatabase.getDatabase(context).cartItemDAO().delete(cartItem);
-                    return null;
-                }
+    private class UpdateCartItemAsyncTask extends AsyncTask<CartItem, Void, Void> {
+        @Override
+        protected Void doInBackground(CartItem... items) {
+            if (items.length > 0) {
+                AppDatabase.getDatabase(context).cartItemDAO().update(items[0]);
+            }
+            return null;
+        }
+    }
 
-                @Override
-                protected void onPostExecute(Void aVoid) {
-                    items.remove(position);
-                    notifyItemRemoved(position);
-                    notifyItemRangeChanged(position, items.size());
-                    // Atualiza o total na activity após remover um item
-                    updateTotalCallback.accept(items);
-                }
-            }.execute();
+    private class DeleteCartItemAsyncTask extends AsyncTask<CartItem, Void, Void> {
+        private int position;
+
+        DeleteCartItemAsyncTask(int position) {
+            this.position = position;
+        }
+
+        @Override
+        protected Void doInBackground(CartItem... items) {
+            if (items.length > 0) {
+                AppDatabase.getDatabase(context).cartItemDAO().delete(items[0]);
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            if (position < items.size()) {
+                items.remove(position);
+                notifyItemRemoved(position);
+                notifyItemRangeChanged(position, items.size());
+                updateTotalCallback.accept(items);
+            }
         }
     }
 }

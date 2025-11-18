@@ -12,9 +12,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.projeto_entrega2.database.AppDatabase;
+import com.example.projeto_entrega2.model.CartItem;
+import com.example.projeto_entrega2.model.Order;
+import com.google.gson.Gson;
 
 import java.text.NumberFormat;
+import java.util.List;
 import java.util.Locale;
+import java.util.UUID;
 
 public class CheckoutActivity extends AppCompatActivity {
 
@@ -53,21 +58,50 @@ public class CheckoutActivity extends AppCompatActivity {
         });
     }
 
-    private class FinalizeOrderAsyncTask extends AsyncTask<Void, Void, Void> {
+    private String generatePickupCode() {
+        return UUID.randomUUID().toString().substring(0, 4).toUpperCase();
+    }
+
+    private class FinalizeOrderAsyncTask extends AsyncTask<Void, Void, Boolean> {
+
+        private List<CartItem> cartItems;
+
         @Override
-        protected Void doInBackground(Void... voids) {
+        protected Boolean doInBackground(Void... voids) {
+            cartItems = db.cartItemDAO().getAll();
+            if (cartItems == null || cartItems.isEmpty()) {
+                return false;
+            }
+
+            Gson gson = new Gson();
+            String itemsJson = gson.toJson(cartItems);
+
+            // CORREÇÃO: Gerando o código de retirada
+            String pickupCode = generatePickupCode();
+            long userId = 1L; // ATENÇÃO: O userId está fixo
+            String status = "Pendente";
+            long timestamp = System.currentTimeMillis();
+            
+            Order newOrder = new Order(userId, itemsJson, totalAmount, status, timestamp, pickupCode);
+
+            db.orderDAO().insert(newOrder);
             db.cartItemDAO().deleteAll();
-            return null;
+
+            return true;
         }
 
         @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            Toast.makeText(CheckoutActivity.this, "Pedido confirmado com sucesso!", Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(CheckoutActivity.this, VitrineActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-            finish();
+        protected void onPostExecute(Boolean success) {
+            super.onPostExecute(success);
+            if (success) {
+                Toast.makeText(CheckoutActivity.this, "Pedido confirmado com sucesso!", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(CheckoutActivity.this, VitrineActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
+            } else {
+                Toast.makeText(CheckoutActivity.this, "Ocorreu um erro ao finalizar o pedido.", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 

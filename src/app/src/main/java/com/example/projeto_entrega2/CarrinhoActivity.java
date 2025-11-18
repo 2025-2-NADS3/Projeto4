@@ -12,7 +12,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.projeto_entrega2.adapter.CarrinhoAdapter;
+// CORREÇÃO: Importando o CartAdapter (nome em inglês)
+import com.example.projeto_entrega2.adapter.CartAdapter;
 import com.example.projeto_entrega2.database.AppDatabase;
 import com.example.projeto_entrega2.model.CartItem;
 
@@ -23,7 +24,8 @@ import java.util.Locale;
 
 public class CarrinhoActivity extends AppCompatActivity {
 
-    private CarrinhoAdapter adapter;
+    // CORREÇÃO: Usando a classe CartAdapter
+    private CartAdapter adapter;
     private TextView totalTextView;
     private AppDatabase db;
     private List<CartItem> cartItems = new ArrayList<>();
@@ -46,7 +48,8 @@ public class CarrinhoActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.recycler_view_carrinho);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         
-        adapter = new CarrinhoAdapter(this, this::updateTotal);
+        // CORREÇÃO: Instanciando o CartAdapter
+        adapter = new CartAdapter(this, this::updateTotal);
         recyclerView.setAdapter(adapter);
 
         Button goToPaymentButton = findViewById(R.id.button_go_to_payment);
